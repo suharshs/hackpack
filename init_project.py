@@ -27,8 +27,17 @@ required_modules = ['tornado']
 if not args.name:
   raise Exception('You must name you project.')
 
+# Change the name of your directory.
 subprocess.call('cd .. && mv hackpack {0} && cd {0}'.format(args.name),
                 shell=True)
+
+if args.git_url:
+  # Git initialization.
+  git_commands = (' git add . &&' +
+                  ' git commit -m "First commit created from the hackpack!"' +
+                  ' && git remote set-url origin {0} &&'.format(args.git_url) +
+                  ' git push -u origin master')
+  subprocess.call(git_commands, shell=True)
 
 if args.venv_base_dir:
   # Create the virtual environment with the user define modules.
@@ -46,11 +55,3 @@ if args.venv_base_dir:
   subprocess.call(venv_commands, shell=True)
   print ('Virtualenv {0} created. Execute \'workon {0}\''.format(args.name) +
          ' before running you application.')
-
-if args.git_url:
-  # Git initialization.
-  git_commands = (' git add . &&' +
-                  ' git commit -m "First commit created from the hackpack!"' +
-                  ' && git remote set-url origin {0} &&'.format(args.git_url) +
-                  ' git push -u origin master')
-  subprocess.call(git_commands, shell=True)
