@@ -1,6 +1,8 @@
 # hackpack
 ## Beautiful boilerplates to help start projects.
 
+hackpack is a simple boilerplate for tornado web server packaged with html5 boilerplate.
+
 ### To use this boilerplate:  
 First, clone this repo.  
     ```$ git clone https://github.com/suharshs/hackpack.git```  
