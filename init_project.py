@@ -1,11 +1,11 @@
 # Boilerplate script for creating a new Tornado web app project.
-# Will create results in new directory from calling directory.
+# Will create git repo with the input url.
 # Author: Suharsh Sivakumar
 # Date: August 13, 2013
 
 import argparse
-import sys
 import subprocess
+import sys
 
 
 parser = argparse.ArgumentParser(prog='mypyserver.py')
@@ -27,14 +27,8 @@ required_modules = ['tornado']
 if not args.name:
   raise Exception('You must name you project.')
 
-# Create the folders.
-subprocess.call(['mkdir', args.name])
-subprocess.call(['mkdir', args.name + '/handlers'])
-subprocess.call(['mkdir', args.name + '/static'])
-subprocess.call(['mkdir', args.name + '/templates'])
-subprocess.call(['mkdir', args.name + '/static/css'])
-subprocess.call(['mkdir', args.name + '/static/img'])
-subprocess.call(['mkdir', args.name + '/static/js'])
+subprocess.call('cd .. && mv hackpack {0} && cd {0}'.format(args.name),
+                shell=True)
 
 if args.venv_base_dir:
   # Create the virtual environment with the user define modules.
@@ -48,13 +42,15 @@ if args.venv_base_dir:
   venv_commands = (venv_commands +
                    ' && /usr/local/bin/pip freeze -E' +
                    ' {0}/{1}'.format(args.venv_base_dir, args.name) +
-                   ' > {0}/requirements.txt'.format(args.name))
+                   ' > requirements.txt')
   subprocess.call(venv_commands, shell=True)
   print ('Virtualenv {0} created. Execute \'workon {0}\''.format(args.name) +
          ' before running you application.')
 
-
-# Add gitignore
-# Initialize with git
-
-# Do the first commit
+if args.git_url:
+  # Git initialization.
+  git_commands = (' git add . &&' +
+                  ' git commit -m "First commit created from the hackpack!"' +
+                  ' && git remote set-url origin {0} &&'.format(args.git_url) +
+                  ' git push -u origin master')
+  subprocess.call(git_commands, shell=True)
