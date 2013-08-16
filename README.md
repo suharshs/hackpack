@@ -12,9 +12,9 @@ Finally run init_project.py to setup your project.
 
 ```
 $ python init_project.py --name your_project_name \  
-                            --venv_base_dir venv_base_directory \  
-                            --git_url your_git_url \  
-                            --modules any extra modules you may want
+                         --venv_base_dir venv_base_directory \  
+                         --git_url your_git_url \  
+                         --modules any extra modules you may want
 ```
 
 ### To start the server:
