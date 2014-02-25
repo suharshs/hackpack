@@ -27,7 +27,7 @@ You can now start the hello world server.
     ```$ python server.py```
 
 
-Requirements:  
+### Requirements: ###
 1. Python  
 2. Git  
 3. Virtualenvwrapper  
